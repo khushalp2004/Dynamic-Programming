@@ -1,5 +1,5 @@
 
-////brute force approach using recursion
+////method-1: brute force approach using recursion
 int sol(int n){
         if(n<0){
             return 0;
@@ -16,7 +16,7 @@ int sol(int n){
         return sol(n);///this recursive function will cause TLE because of O(2^N) time Complexity
     }
 
-    ////Memoization of the recursion
+    ///method-2: Memoization of the recursion
     int dp[46];
     int sol(int n){
         if(n<0){
@@ -38,4 +38,22 @@ int sol(int n){
     int climbStairs(int n) {
         memset(dp,-1,sizeof(dp));
         return sol(n);/////here recursion is memoized to recover the TLE causing because of recursion.....
+    }
+
+    ///method-2: bottom-up solution
+    int climbStairs(int n) {
+        if(n==0 || n==1 || n==2){
+            return n;///base cases
+        }
+        vector<int> arr(n+1);
+        int result=0;
+        arr[0]=0;//arr element-1
+        arr[1]=1;//arr element-1
+        arr[2]=2;//arr element-1
+
+        for(int i=3;i<=n;i++){
+            arr[i]=arr[i-1]+arr[i-2];///result of ith's previous + ith's previous previous
+        }
+
+        return arr[n];///return n elements result
     }
