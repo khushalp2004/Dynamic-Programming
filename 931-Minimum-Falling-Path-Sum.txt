@@ -1,0 +1,21 @@
+
+///931. Minimum Falling Path Sum
+int minFallingPathSum(vector<vector<int>>& matrix) {
+        //greedy fails here so use bottom-up approach
+        int n=matrix.size();
+        vector<vector<int>> dp=matrix;
+
+        for(int i=n-2;i>=0;i--){
+            for(int j=0;j<n;j++){
+                int best=dp[i+1][j];
+                if(j>0){
+                    best=min(best,dp[i+1][j-1]);///down-left
+                }
+                if(j<n-1){
+                    best=min(best,dp[i+1][j+1]);///down-right
+                }
+                dp[i][j]+=best;
+            }
+        }
+        return *min_element(dp[0].begin(),dp[0].end());
+    }
