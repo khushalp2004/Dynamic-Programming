@@ -1,0 +1,16 @@
+
+
+// 1218. Longest Arithmetic Subsequence of Given Difference
+int longestSubsequence(vector<int>& arr, int difference) {
+       ////extra space is required to solve the problem
+       ///because we need to store the states without storing the states we have to track back which causes TLE.....
+       unordered_map<int,int> dp;////store the states
+       int longest=0;
+
+       for(int x: arr){
+            dp[x]=dp[x-difference]+1;
+            longest=max(longest,dp[x]);
+       }
+
+       return longest;
+    }
