@@ -18,4 +18,22 @@ int findLongestChain(vector<vector<int>>& pairs) {
         return *max_element(dp.begin(),dp.end());
     }
 
-//
+//method-2 
+///using greedy approach we can solve it 
+///by using second element which is the optimal solution
+int findLongestChain(vector<vector<int>>& pairs) {
+        sort(pairs.begin(),pairs.end(),[](auto &a, auto &b){
+            return a[1]<b[1];
+        });
+        int current=INT_MIN;
+        int ans=0;
+
+        for(auto &p: pairs){
+            if(p[0]>current){
+                ans++;
+                current=p[1];
+            }
+        }
+
+        return ans;
+    }
